@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+
+input {
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  font-size: 150%;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  outline-color: purple;
+}
+
+#inputHolder {
+  text-align: center;
+  margin-top: 377px;
+}
+
+#rightAnswer input, #inputHolder input {
+  border-radius: 40%;
+  border: none;
+  outline: none;
+  padding: 2px;
+  font-family: 'Courgette', cursive;
+}
+
+#rightAnswer{
+  position: absolute;
+  top: 50px;
+}
+
+#gameTitle {
+  position: absolute;
+  font-size: 240%;
+  left: 625px;
+  top: 315px;
+  user-select: none;
+}
+
+.rightAnswer {
+  margin-left: 6px;
+  user-select: none;
+}
+
+.musicOff {
+  background-color: transparent;
+  border: 2px solid black;
+  padding: 2px 6px 2px 6px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  outline: none;
+}
+
+.musicOn {
+  background-color: transparent;
+  border: 2px solid black;
+  padding: 2px;
+  position: absolute;
+  right: 30px;
+  top: 5px;
+  outline: none;
+}
+
+body {
+  background-image: url('../images/lingobg.png');
+  background-size: cover;
+  overflow: hidden;
+  font-family: 'Courgette', cursive;
+}
