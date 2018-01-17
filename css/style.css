@@ -1,0 +1,33 @@
+body {
+	margin: 0 auto;
+	background: url("../img/background.jpg") no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
+#lingoField {
+	position: relative;
+	left: 10px;
+	top: 29px;
+}
+
+input {
+    color: white;
+    background-color: HotPink;
+    text-transform:uppercase;
+    display: inline;
+    position: relative;
+    height: 81px;
+    width: 112.7px;
+    top: 456px;
+    left: 660px;
+    font-size: 50px;
+    text-align: center;
+}
+
+#countdown {
+  background-color:#419D78;
+  color:#EFD0CA;
+  font-size:20px;
+  text-align:center;
+}
