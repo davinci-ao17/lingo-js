@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette');
+@import url('https://fonts.googleapis.com/css?family=Merienda+One');
 
 input {
   height: 35px;
@@ -12,7 +13,7 @@ input {
 
 #inputHolder {
   text-align: center;
-  margin-top: 377px;
+  margin-top: 374px;
 }
 
 #rightAnswer input, #inputHolder input {
@@ -20,7 +21,6 @@ input {
   border: none;
   outline: none;
   padding: 2px;
-  font-family: 'Courgette', cursive;
 }
 
 #rightAnswer{
@@ -32,7 +32,7 @@ input {
   position: absolute;
   font-size: 240%;
   left: 625px;
-  top: 315px;
+  top: 310px;
   user-select: none;
 }
 
@@ -41,29 +41,9 @@ input {
   user-select: none;
 }
 
-.musicOff {
-  background-color: transparent;
-  border: 2px solid black;
-  padding: 2px 6px 2px 6px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  outline: none;
-}
-
-.musicOn {
-  background-color: transparent;
-  border: 2px solid black;
-  padding: 2px;
-  position: absolute;
-  right: 30px;
-  top: 5px;
-  outline: none;
-}
-
 body {
   background-image: url('../images/lingobg.png');
   background-size: cover;
   overflow: hidden;
-  font-family: 'Courgette', cursive;
+  font-family: Merienda One;
 }

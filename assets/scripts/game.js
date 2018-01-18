@@ -1,9 +1,9 @@
 const inputHolder = document.getElementById('inputHolder');
 const rightAnswer = document.getElementById('rightAnswer');
-var lingoMusic = new Audio("assets/sounds/lingo.mp3");
 var word = "";
 var wordParts = [];
 var index = 0;
+var letters = [];
 
 function init() {
   getRandomWord();
@@ -12,9 +12,7 @@ function init() {
 }
 init();
 
-// setInterval(function(){ lingoMusic.play(); }, 1000);
-lingoMusic.volume = 0.5;
-
+// generate inputs
 function genInput() {
   for (var i = 0; i < 25; i++) {
     if (i < 24) {
@@ -30,6 +28,7 @@ function genInput() {
 
   setVal();
 
+  // put letters from word into inputs
   document.getElementById('input0').value = wordParts[0];
   document.getElementById('input5').value = wordParts[0];
   document.getElementById('input10').value = wordParts[0];
@@ -37,6 +36,7 @@ function genInput() {
   document.getElementById('input20').value = wordParts[0];
 }
 
+// generate inputs for lose
 function onLose() {
   for (var i = 0; i < 5; i++) {
     if (i < 24) {
@@ -59,70 +59,40 @@ function setVal() {
   }
 }
 
+// get random word from word list
 function getRandomWord() {
   word = words[Math.floor(Math.random() * words.length)];
   console.log(word);
 
   for (var i = 0; i < word.length; i++) {
+    // split word and put into row
     wordParts.push(word.substr(i, i + 1).substr(0,1));
   }
   console.log(wordParts);
 }
 
-function check(input, pos) {
-  var isInWord = false;
-  if (wordParts[pos] == input) {
-    return "red";
-  } else {
-    for (var i = 0; i < wordParts.length; i++) {
-      if (wordParts[i] == input) {
-        isInWord = true;
-      }
-    }
-    if (isInWord) {
-      return "yellow";
-    } else {
-      return "";
-    }
-  }
-}
-
+// checks row based on current index
 function checkRow() {
   switch(index) {
     case 0:
-        document.getElementById('input1').style.backgroundColor = check(document.getElementById('input1').value, 1);
-        document.getElementById('input2').style.backgroundColor = check(document.getElementById('input2').value, 2);
-        document.getElementById('input3').style.backgroundColor = check(document.getElementById('input3').value, 3);
-        document.getElementById('input4').style.backgroundColor = check(document.getElementById('input4').value, 4);
-        winCheck(1, 4);
+        setColor(0, 5);
+        winCheck(0, 5);
         break;
     case 1:
-        document.getElementById('input6').style.backgroundColor = check(document.getElementById('input6').value, 1);
-        document.getElementById('input7').style.backgroundColor = check(document.getElementById('input7').value, 2);
-        document.getElementById('input8').style.backgroundColor = check(document.getElementById('input8').value, 3);
-        document.getElementById('input9').style.backgroundColor = check(document.getElementById('input9').value, 4);
-        winCheck(6, 9);
+        setColor(5, 10);
+        winCheck(5, 10);
         break;
     case 2:
-        document.getElementById('input11').style.backgroundColor = check(document.getElementById('input11').value, 1);
-        document.getElementById('input12').style.backgroundColor = check(document.getElementById('input12').value, 2);
-        document.getElementById('input13').style.backgroundColor = check(document.getElementById('input13').value, 3);
-        document.getElementById('input14').style.backgroundColor = check(document.getElementById('input14').value, 4);
-        winCheck(11, 14);
+        setColor(10, 15);
+        winCheck(10, 15);
         break;
     case 3:
-        document.getElementById('input16').style.backgroundColor = check(document.getElementById('input16').value, 1);
-        document.getElementById('input17').style.backgroundColor = check(document.getElementById('input17').value, 2);
-        document.getElementById('input18').style.backgroundColor = check(document.getElementById('input18').value, 3);
-        document.getElementById('input19').style.backgroundColor = check(document.getElementById('input19').value, 4);
-        winCheck(16, 19);
+        setColor(15, 20);
+        winCheck(15, 20);
         break;
     case 4:
-        document.getElementById('input21').style.backgroundColor = check(document.getElementById('input21').value, 1);
-        document.getElementById('input22').style.backgroundColor = check(document.getElementById('input22').value, 2);
-        document.getElementById('input23').style.backgroundColor = check(document.getElementById('input23').value, 3);
-        document.getElementById('input24').style.backgroundColor = check(document.getElementById('input24').value, 4);
-        winCheck(21, 24);
+        setColor(20, 25);
+        winCheck(20, 25);
         break;
     default:
         alert("ERROR");
@@ -131,63 +101,47 @@ function checkRow() {
 }
 
 function winCheck(min, max) {
-  if (index >= 4) {
-    var hasLost = false;
-    for (var i = min; i < max; i++) {
-      if (document.getElementById('input'+i).style.backgroundColor != "red") {
-        hasLost = true;
-      }
+  // check if input background aren't red
+  var hasLost = false;
+  for (var i = min; i < max; i++) {
+    if (document.getElementById('input'+i).style.backgroundColor != "red") {
+      hasLost = true;
     }
-    if (!hasLost) {
-      alert('yay');
-    } else {
-      document.getElementById('answer0').value = wordParts[0];
-      document.getElementById('answer1').value = wordParts[1];
-      document.getElementById('answer2').value = wordParts[2];
-      document.getElementById('answer3').value = wordParts[3];
-      document.getElementById('answer4').value = wordParts[4];
-      setTimeout(function(){
-        if (window.confirm('You lost!'))
-        {
-          setTimeout(function(){ location.reload(); }, 1500);
-        } else {
-          setTimeout(function(){ location.reload(); }, 1500);
-        }
+  }
+  // check if won
+  if (!hasLost) {
+    if (window.confirm('You won!')) {
+      setTimeout(function(){ location.reload(); }, 500);
+    }
+    // check if lost
+  } else if (index >= 4) {
+    document.getElementById('answer0').value = wordParts[0];
+    document.getElementById('answer1').value = wordParts[1];
+    document.getElementById('answer2').value = wordParts[2];
+    document.getElementById('answer3').value = wordParts[3];
+    document.getElementById('answer4').value = wordParts[4];
+    setTimeout(function(){
+      alert('You lost!');
+      setTimeout(function(){ location.reload(); }, 1500);
       }, 1500);
     }
-  } else {
-    var hasLost = false;
-    for (var i = min; i < max; i++) {
-      if (document.getElementById('input'+i).style.backgroundColor != "red") {
-        hasLost = true;
-      }
-    }
-    if (!hasLost) {
-      if (window.confirm('You won!'))
-      {
-          setTimeout(function(){ location.reload(); }, 500);
-      }
-    }
   }
-}
-
-if (index >= 1 || index >= 2 || index >= 3 || index >= 4) {
-  for (var i = min; i < max; i++) {
-    if (document.input.style.backgroundColor = "red") {
-      document.input.setAttribute("disabled", "disabled");
-    }
-  }
-}
 
 function rowCheck() {
   var hasChecked = false;
+  // Loop through index
   if (index == 0) {
+    // Loop through input fields
     for (var i = 1; i < 5; i++){
+      // check if there are empty inputs
       if (document.getElementById('input'+i).value == "") {
+        // put hasChecked on true when an empty input is found
         hasChecked = true;
       }
     }
+    // Check if there are non-empty input fields
     if (!hasChecked) {
+      // checks row based on current index
       checkRow();
     }
   }
@@ -233,9 +187,54 @@ function rowCheck() {
   }
 }
 
+// Focus on next input when current input is filled in
 function autotab(current,to){
     var elem = document.getElementById("input" + to);
     if (current.value.length <= current.getAttribute("maxlength")) {
         elem.focus();
     }
+}
+
+// Set color to inputs when checked
+function setColor(min, max){
+    // make copy of wordParts
+    letters = Object.assign({}, wordParts);
+    // Get the color Red
+    getColorRed(min, max);
+}
+
+function getColorRed(min, max){
+    fixFirst(min);
+    var currentIndex = 0;
+    for (var i = min; i < max; i++) {
+      // Check if background color is empty && Check if the right letter is filled in on the right place
+      if (document.getElementById("input"+i).style.backgroundColor == "" && document.getElementById('input'+i).value == letters[currentIndex]){
+          document.getElementById("input"+i).style.backgroundColor = "red";
+          // delete red letter from 'letters'
+          delete letters[currentIndex];
+      }
+      currentIndex ++;
+    }
+    // Get the color Yellow
+    getColorYellow(min, max);
+}
+
+function getColorYellow(min, max){
+    for (var i = min; i < max; i++) {
+        for (var o = 0; o < 5; o++) {
+            // Check if background color is empty && Check if letter is filled in on the right place
+            if (document.getElementById("input"+i).style.backgroundColor == "" && document.getElementById('input'+i).value == letters[o]){
+                document.getElementById("input"+i).style.backgroundColor = "yellow";
+                // delete yellow leyyer from 'letters'
+                delete letters[o];
+            }
+        }
+    }
+}
+
+function fixFirst(id){
+    // Give first letter of row red background color
+    document.getElementById('input'+id).style.backgroundColor = "red";
+    // delete first letter from 'letters'
+    delete letters[0];
 }
