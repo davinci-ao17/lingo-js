@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+@import url('https://fonts.googleapis.com/css?family=Merienda+One');
+
+input {
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  font-size: 150%;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  outline-color: purple;
+}
+
+#inputHolder {
+  text-align: center;
+  margin-top: 374px;
+}
+
+#rightAnswer input, #inputHolder input {
+  border-radius: 40%;
+  border: none;
+  outline: none;
+  padding: 2px;
+}
+
+#rightAnswer{
+  position: absolute;
+  top: 50px;
+}
+
+#gameTitle {
+  position: absolute;
+  font-size: 240%;
+  left: 625px;
+  top: 310px;
+  user-select: none;
+}
+
+.rightAnswer {
+  margin-left: 6px;
+  user-select: none;
+}
+
+body {
+  background-image: url('../images/lingobg.png');
+  background-size: cover;
+  overflow: hidden;
+  font-family: Merienda One;
+}
