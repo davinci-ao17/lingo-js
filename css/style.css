@@ -13,7 +13,7 @@ body {
 
 input {
     color: white;
-    background-color: HotPink;
+    background-color: blue;
     text-transform:uppercase;
     display: inline;
     position: relative;
@@ -26,8 +26,17 @@ input {
 }
 
 #countdown {
-  background-color:#419D78;
   color:#EFD0CA;
-  font-size:20px;
+  font-size:45px;
   text-align:center;
+  width: 100px;
+  left: 520px;
+  top: 520px;
+  position: absolute;
+}
+
+footer {
+	top: 920px;
+	left: 20px;
+	position: absolute;
 }
