@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Lingo!</title>
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="">
-</head>
-<body>
-
-	
-	
-	<script src="words-nl.js" type="text/javascript" ></script>
-	<script src="game.js" type="text/javascript" ></script>
-</body>
+<html lang="nl">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+		<meta charset="utf-8">
+		<title>Lingo - NL</title>
+	</head>
+	<body>
+		<header>
+			<img id="lingoIMG" src="img/lingo.png" alt="lingoPicture">
+		</header>
+		<main>
+			<div id="lingofield">
+			</div>
+			<div id="myProgress">
+  				<div id="myBar"></div>
+			</div>
+		</main>
+		<footer>
+			<h1>Made by Brandon van Zanten</h1>
+			<audio id="goodWord" autoplay src="audio/lingoGoodWord.mp3"></audio>
+			<audio id="inputWord" autoplay src="audio/lingoInputWord.mp3"></audio>
+			<audio id="timeUp" autoplay src="audio/lingoBuzzer.mp3"></audio>
+			<audio id="backgroundSound" autoplay loop src="audio/lingoBackground.mp3"></audio>
+			<script src="js/words-nl.js"></script>
+			<script src="js/game.js"></script>
+		</footer>
+	</body>
 </html>

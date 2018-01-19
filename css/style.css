@@ -1,0 +1,66 @@
+body {
+	margin: 0 auto;
+	background: url("../img/background.jpg") no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
+header {
+	background-color: #9b9b9b;
+	height: 75px;
+	width: 100%;
+	float: left;
+}
+
+#lingofield {
+	position: relative;
+	left: 490px;
+	top: 25px;
+}
+
+#lingoIMG {
+	position: relative;
+	height: 180px;
+	bottom: 53px;
+	width: 520px;
+	left: 520px;
+}
+
+input {
+	color: white;
+	background-color: blue;
+	text-transform:uppercase;
+	display: inline;
+	position: relative;
+	height: 63px;
+	width: 98.5px;
+	top: 287px;
+	left: 11px;
+	font-family: 'Libre Baskerville', serif;
+	font-style: bold;
+	font-size: 48px;
+	text-align: center;
+}
+
+h1 {
+	position: relative;
+	float: right;
+	top: 260px;
+	padding-right: 20px;
+	color: white;
+	font-family: Arial, serif;
+	font-size: 13px;
+}
+
+#myProgress {
+    width: 31%;
+    position: relative;
+    left: 516px;
+    bottom: 68px;
+    background-color: grey;
+}
+#myBar {
+    width: 1%;
+    height: 20px;
+    background-color: red;
+}
