@@ -1,59 +1,57 @@
-	var word = "";
-	var resetBar = 0;
-	var index = 0;
-	var pieces = [];
-	var letters = [];
-	var resetBar = null;
-	const lingoField = document.getElementById("lingoField");
-	//audio deel
-	//end audio
-	const elem = document.getElementById("myBar");
-	const goodW = new Audio("music/goodW.mp3");
+var word = "";
+var resetBar = 0;
+var index = 0;
+var pieces = [];
+var letters = [];
+var resetBar = null;
+const lingoField = document.getElementById("lingoField");
 
-	function getRandomWord(){
-	return words[(Math.floor(Math.random() * words.length) )];
-	}
+const goodW = new Audio("music/goodW.mp3");
 
-	function process() {
-	word = getRandomWord();
-	console.log(word);
-	parts = word.split("");
-	generateInputs();
-	}
+function getRandomWord(){
+return words[(Math.floor(Math.random() * words.length) )];
+}
 
-	document.getElementById("timer").innerHTML =
-	  1 + ":" + 0;
-	startTimer();
+function process() {
+word = getRandomWord();
+console.log(word);
+parts = word.split("");
+generateInputs();
+}
 
-	function startTimer() {
-	  var presentTime = document.getElementById("timer").innerHTML;
-	  var timeArray = presentTime.split(/[:]+/);
-	  var m = timeArray[0];
-	  var s = checkSecond(timeArray[1] - 1);
-	  if (s==59){
-	  m = m - 1;
-	  }
-	  if(m<0){
-	  alert("Helaas heb je het niet binnen de beschikbare tijd geraden. Het goede woord was " + word);
-	  location.reload();
-	  }
+document.getElementById("timer").innerHTML =
+  1 + ":" + 0;
+startTimer();
 
-	  document.getElementById("timer").innerHTML =
-	    m + ":" + s;
-	  setTimeout(startTimer, 1000);
-	}
+function startTimer() {
+  var presentTime = document.getElementById("timer").innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond(timeArray[1] - 1);
+  if (s==59){
+  m = m - 1;
+  }
+  if(m<0){
+  alert("Helaas heb je het niet binnen de beschikbare tijd geraden. Het goede woord was " + word);
+  location.reload();
+  }
 
-	function checkSecond(sec) {
-	  if (sec < 10 && sec >= 0) {sec = "0" + sec;
-	}
-	  if (sec < 0) {sec = "59";
-	}
-	 return sec;
-	}
+  document.getElementById("timer").innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
 
-	process();
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec;
+}
+  if (sec < 0) {sec = "59";
+}
+ return sec;
+}
 
-	function generateInputs(){
+process();
+
+function generateInputs(){
 	    for (var i = 0; i < 25; i++) {
 	        if (i < 24) {
 	            if (i == 4 || i == 9 || i == 14 || i == 19 ){
@@ -68,134 +66,133 @@
 	    setValues();
 	}
 
-	function setValues(){
-		for (var i = 0; i < 24; i++) {
-			if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20 ){
-				document.getElementById(i).disabled = true;
-			}
-			if (i == 1) {
-				document.getElementById(i).autofocus = true;
-			}
+function setValues(){
+	for (var i = 0; i < 24; i++) {
+		if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20 ){
+			document.getElementById(i).disabled = true;
 		}
-		document.getElementById(0).value = getFirst();
-	}
-
-	function getFirst(){
-		return word.substr(0,1).toUpperCase();
-	}
-
-	function autotab(current,to) {
-		if (current.value.length <= current.getAttribute("maxlength")) {
-			to.focus();
-
+		if (i == 1) {
+			document.getElementById(i).autofocus = true;
 		}
 	}
+	document.getElementById(0).value = getFirst();
+}
 
-	function check(){
-	    switch (index) {
-	    case 0:
-	        setColor(0, 5, 5);
-	        checkWin(0, 5);
-	        break;
-	    case 1:
-	        setColor(5, 10, 10);
-	        checkWin(5, 10);
-	        break;
-	    case 2:
-	        setColor(10, 15, 15);
-	        checkWin(10, 15);
-	        break;
-	    case 3:
-	        setColor(15, 20, 20);
-	        checkWin(15, 20);
-	        break;
-	    case 4:
-	        setColor(20, 25, 25);
-	        checkWin(20, 25);
-	        break;
-	    default:
-	        alert("error");
-	        break;
-	    }
-	    index ++;
+function getFirst(){
+	return word.substr(0,1).toUpperCase();
+}
+
+function autotab(current,to) {
+	if (current.value.length <= current.getAttribute("maxlength")) {
+		to.focus();
+		}
 	}
 
-	function setColor(min, max, skipexeption){
-	    letters = Object.assign({}, parts);
-	    if(skipexeption < 24){
-	        document.getElementById(skipexeption).value = getFirst();
-	    }
-	    getColorRed(min, max, skipexeption);
-	}
+function check(){
+    switch (index) {
+    case 0:
+        setColor(0, 5, 5);
+        checkWin(0, 5);
+        break;
+    case 1:
+        setColor(5, 10, 10);
+        checkWin(5, 10);
+        break;
+    case 2:
+        setColor(10, 15, 15);
+        checkWin(10, 15);
+        break;
+    case 3:
+        setColor(15, 20, 20);
+        checkWin(15, 20);
+        break;
+    case 4:
+        setColor(20, 25, 25);
+        checkWin(20, 25);
+        break;
+    default:
+        alert("error");
+        break;
+    }
+    index ++;
+}
 
-	function getColorRed(min, max, skipexeption){
-	    fixFirst(min);
-	    var currentIndex = 0;
-	    for (var i = min; i < max; i++) {
-	        if (i != skipexeption) {
-	            if (document.getElementById(i).style.backgroundColor == "" && document.getElementById(i).value == letters[currentIndex]){
-	                document.getElementById(i).style.backgroundColor = "red";
-	                delete letters[currentIndex];
-	            }
-	        }
-	        currentIndex ++;
-	    }
-	    getColorYellow(min, max, skipexeption);
-	}
-	function getColorYellow(min, max, skipexeption){
-	    for (var i = min; i < max; i++) {
-	        if (i != skipexeption) {
-	            for (var o = 0; o < (Object.keys(letters).length + 3); o++) {
-	                if (document.getElementById(i).style.backgroundColor == "" && document.getElementById(i).value == letters[o]){
-	                    document.getElementById(i).style.backgroundColor = "yellow";
-	                    document.getElementById(i).style.borderRadius = "50%";
-	                    delete letters[o];
-	                }
-	            }
-	        }
-	    }
-	}
+function setColor(min, max, skipexeption){
+    letters = Object.assign({}, parts);
+    if(skipexeption < 24){
+        document.getElementById(skipexeption).value = getFirst();
+    }
+    getColorRed(min, max, skipexeption);
+}
 
-	function fixFirst(id){
-	    document.getElementById(id).style.backgroundColor = "red";
-	    delete letters[0];
-	}
+function getColorRed(min, max, skipexeption){
+    fixFirst(min);
+    var currentIndex = 0;
+    for (var i = min; i < max; i++) {
+        if (i != skipexeption) {
+            if (document.getElementById(i).style.backgroundColor == "" && document.getElementById(i).value == letters[currentIndex]){
+                document.getElementById(i).style.backgroundColor = "red";
+                delete letters[currentIndex];
+            }
+        }
+        currentIndex ++;
+    }
+    getColorYellow(min, max, skipexeption);
+}
+function getColorYellow(min, max, skipexeption){
+    for (var i = min; i < max; i++) {
+        if (i != skipexeption) {
+            for (var o = 0; o < (Object.keys(letters).length + 3); o++) {
+                if (document.getElementById(i).style.backgroundColor == "" && document.getElementById(i).value == letters[o]){
+                    document.getElementById(i).style.backgroundColor = "yellow";
+                    document.getElementById(i).style.borderRadius = "50%";
+                    delete letters[o];
+                }
+            }
+        }
+    }
+}
 
-	function doDisable(){
-	    for (var i = 0; i < 24; i++) {
-	        if (document.getElementById(i).value != "") {
-	            document.getElementById(i).disabled = true;
-	        }
-	    }
-	}
-	function checkWin(min, max){
-	    if (index >= 4) {
-	        var hasLost = false;
-	        for (var i = min; i < max; i++) {
-	            if (document.getElementById(i).style.backgroundColor != "red") {
-	                hasLost = true;
-				}
-	        } 
-	        if (!hasLost) {
-	            hasWon();
-	        } else {
-	            gotGameOver();
-	        }
-	    } else {
-	        var hasLost = false;
-	        for (var i = min; i < max; i++) {
-	            if (document.getElementById(i).style.backgroundColor != "red") {
-	                hasLost = true;
-				}
-	        } 
-	        if (!hasLost) {
-	            hasWon();
-	            setTimeout(function () {
-	                location.reload();
-	            }, 3800);
-	        }
-	    }
-	}
+function fixFirst(id){
+    document.getElementById(id).style.backgroundColor = "red";
+    delete letters[0];
+}
+
+function doDisable(){
+    for (var i = 0; i < 24; i++) {
+        if (document.getElementById(i).value != "") {
+            document.getElementById(i).disabled = true;
+        }
+    }
+}
+function checkWin(min, max){
+    if (index >= 4) {
+        var hasLost = false;
+        for (var i = min; i < max; i++) {
+            if (document.getElementById(i).style.backgroundColor != "red") {
+                hasLost = true;
+			}
+        } 
+        if (!hasLost) {
+            hasWon();
+        } else {
+            gotGameOver();
+        }
+    } else {
+        var hasLost = false;
+        for (var i = min; i < max; i++) {
+            if (document.getElementById(i).style.backgroundColor != "red") {
+                hasLost = true;
+			}
+        } 
+        if (!hasLost) {
+            hasWon();
+            setTimeout(function () {
+                location.reload();
+            }, 3800);
+        }
+    }
+}
 
 	function hasWon(){
 		goodW.play();
@@ -211,58 +208,58 @@
 	    }, 1000);
 	}
 
-	function rowCheck(){
-	    doDisable();
-	    var hasChecked = false;
-	    letters = Object.assign({}, parts);
-	    if (index == 0) {
-	        for (var i = 0; i < 5; i++){
-	            if (document.getElementById(i).value == "") {
-	                hasChecked = true;
-	            }
-	        }
-	        if (!hasChecked) {
-	            check();
-	        }
-	    }
-	    if (index == 1) {
-	        for (var i = 5; i < 10; i++){
-	            if (document.getElementById(i).value == "") {
-	                hasChecked = true;
-	            }
-	        }
-	        if (!hasChecked) {
-	            check();
-	        }
-	    }
-	    if (index == 2) {
-	        for (var i = 10; i < 15; i++){
-	            if (document.getElementById(i).value == "") {
-	                hasChecked = true;
-	            }
-	        }
-	        if (!hasChecked) {
-	            check();
-	        }
-	    }
-	    if (index == 3) {
-	        for (var i = 15; i < 20; i++){
-	            if (document.getElementById(i).value == "") {
-	                hasChecked = true;
-	            }
-	        }
-	        if (!hasChecked) {
-	            check();
-	        }
-	    }
-	    if (index == 4) {
-	        for (var i = 20; i < 25; i++){
-	            if (document.getElementById(i).value == "") {
-	                hasChecked = true;
-	            }
-	        }
-	        if (!hasChecked) {
-	            check();
-	        }
-	    }
-	}
+function rowCheck(){
+    doDisable();
+    var hasChecked = false;
+    letters = Object.assign({}, parts);
+    if (index == 0) {
+        for (var i = 0; i < 5; i++){
+            if (document.getElementById(i).value == "") {
+                hasChecked = true;
+            }
+        }
+        if (!hasChecked) {
+            check();
+        }
+    }
+    if (index == 1) {
+        for (var i = 5; i < 10; i++){
+            if (document.getElementById(i).value == "") {
+                hasChecked = true;
+            }
+        }
+        if (!hasChecked) {
+            check();
+        }
+    }
+    if (index == 2) {
+        for (var i = 10; i < 15; i++){
+            if (document.getElementById(i).value == "") {
+                hasChecked = true;
+            }
+        }
+        if (!hasChecked) {
+            check();
+        }
+    }
+    if (index == 3) {
+        for (var i = 15; i < 20; i++){
+            if (document.getElementById(i).value == "") {
+                hasChecked = true;
+            }
+        }
+        if (!hasChecked) {
+            check();
+        }
+    }
+    if (index == 4) {
+        for (var i = 20; i < 25; i++){
+            if (document.getElementById(i).value == "") {
+                hasChecked = true;
+            }
+        }
+        if (!hasChecked) {
+            check();
+        }
+    }
+}
