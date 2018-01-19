@@ -4,67 +4,65 @@ var index = 0;
 var pieces = [];
 var letters = [];
 var resetBar = null;
-const lingoField = document.getElementById("lingoField");
-
-const goodW = new Audio("music/goodW.mp3");
+const lingoField = document.getElementById('lingoField');
+//audio deel
+const goodWord = document.getElementById('goodWord');
+//end audio
+const elem = document.getElementById('myBar');
 
 function getRandomWord(){
-return words[(Math.floor(Math.random() * words.length) )];
+	return words[(Math.floor(Math.random() * words.length) )];
 }
 
-function process() {
-word = getRandomWord();
-console.log(word);
-parts = word.split("");
-generateInputs();
+function process(){
+	word = getRandomWord();
+	console.log(word);
+	parts = word.split('');
+	generateInputs();
 }
 
-document.getElementById("timer").innerHTML =
-  1 + ":" + 0;
+document.getElementById('timer').innerHTML =
+  01 + ":" + 00;
 startTimer();
 
 function startTimer() {
-  var presentTime = document.getElementById("timer").innerHTML;
+  var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
   var m = timeArray[0];
-  var s = checkSecond(timeArray[1] - 1);
-  if (s==59){
-  m = m - 1;
-  }
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
   if(m<0){
-  alert("Helaas heb je het niet binnen de beschikbare tijd geraden. Het goede woord was " + word);
-  location.reload();
+  	alert('Helaas heb je het niet binnen de beschikbare tijd geraden. Het goede woord was ' + word);
+  	location.reload();
   }
 
-  document.getElementById("timer").innerHTML =
+  document.getElementById('timer').innerHTML =
     m + ":" + s;
   setTimeout(startTimer, 1000);
 }
 
 function checkSecond(sec) {
-  if (sec < 10 && sec >= 0) {sec = "0" + sec;
-}
-  if (sec < 0) {sec = "59";
-}
- return sec;
+  if (sec < 10 && sec >= 0) {sec = "0" + sec};
+  if (sec < 0) {sec = "59"};
+  return sec;
 }
 
 process();
 
 function generateInputs(){
-	    for (var i = 0; i < 25; i++) {
-	        if (i < 24) {
-	            if (i == 4 || i == 9 || i == 14 || i == 19 ){
-	                lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeypress='autotab(this, document.getElementById(" + (i+2) + "))' value='' onchange='rowCheck()'><br>";
-	            } else {
-	                lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeypress='autotab(this, document.getElementById(" + (i+1) + "))' value='' onchange='rowCheck()'>";
-	            }
-	        } else {
-	            lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeyup='this.blur();' value='' onchange='rowCheck()'>";
-	        }
-	    }
-	    setValues();
-	}
+    for (var i = 0; i < 25; i++) {
+        if (i < 24) {
+            if (i == 4 || i == 9 || i == 14 || i == 19 ){
+                lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeyup='autotab(this, document.getElementById(" + (i+2) + "))' value='' onchange='rowCheck()'><br>";
+            } else {
+                lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeyup='autotab(this, document.getElementById(" + (i+1) + "))' value='' onchange='rowCheck()'>";
+            }
+        } else {
+            lingoField.innerHTML += "<input type='text' id='"+i+"' maxlength='1' onKeyup='this.blur();' value='' onchange='rowCheck()'>";
+        }
+    }
+    setValues();
+}
 
 function setValues(){
 	for (var i = 0; i < 24; i++) {
@@ -85,8 +83,8 @@ function getFirst(){
 function autotab(current,to) {
 	if (current.value.length <= current.getAttribute("maxlength")) {
 		to.focus();
-		}
 	}
+}
 
 function check(){
     switch (index) {
@@ -111,7 +109,7 @@ function check(){
         checkWin(20, 25);
         break;
     default:
-        alert("error");
+        alert('error');
         break;
     }
     index ++;
@@ -145,7 +143,6 @@ function getColorYellow(min, max, skipexeption){
             for (var o = 0; o < (Object.keys(letters).length + 3); o++) {
                 if (document.getElementById(i).style.backgroundColor == "" && document.getElementById(i).value == letters[o]){
                     document.getElementById(i).style.backgroundColor = "yellow";
-                    document.getElementById(i).style.borderRadius = "50%";
                     delete letters[o];
                 }
             }
@@ -154,13 +151,13 @@ function getColorYellow(min, max, skipexeption){
 }
 
 function fixFirst(id){
-    document.getElementById(id).style.backgroundColor = "red";
+    document.getElementById(id).style.backgroundColor = "rgb(228, 45, 41)";
     delete letters[0];
 }
 
 function doDisable(){
     for (var i = 0; i < 24; i++) {
-        if (document.getElementById(i).value != "") {
+        if (document.getElementById(i).value != '') {
             document.getElementById(i).disabled = true;
         }
     }
@@ -171,7 +168,7 @@ function checkWin(min, max){
         for (var i = min; i < max; i++) {
             if (document.getElementById(i).style.backgroundColor != "red") {
                 hasLost = true;
-			}
+            }
         } 
         if (!hasLost) {
             hasWon();
@@ -181,9 +178,9 @@ function checkWin(min, max){
     } else {
         var hasLost = false;
         for (var i = min; i < max; i++) {
-            if (document.getElementById(i).style.backgroundColor != "red") {
+            if (document.getElementById(i).style.backgroundColor != "rgb(228, 45, 41)") {
                 hasLost = true;
-			}
+            }
         } 
         if (!hasLost) {
             hasWon();
@@ -194,19 +191,18 @@ function checkWin(min, max){
     }
 }
 
-	function hasWon(){
-		goodW.play();
-	    setTimeout(function () {
-	        location.reload();
-	    }, 3800);
-	}
+function hasWon(){
+    setTimeout(function () {
+        location.reload();
+    }, 1000);
+}
 
-	function gotGameOver(){
-	    alert("Je hebt niet het goede woord geraden! Het goede woord was: "+ word);
-	    setTimeout(function () {
-	        location.reload();
-	    }, 1000);
-	}
+function gotGameOver(){
+    alert("Je hebt niet het goede woord geraden! Het goede woord was: "+ word);
+    setTimeout(function () {
+        location.reload();
+    }, 1000);
+}
 
 function rowCheck(){
     doDisable();
